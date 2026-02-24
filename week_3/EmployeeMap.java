@@ -60,4 +60,26 @@ public class EmployeeMap {
 
     }
 
+
+public static void main(String[] args) {
+
+        EmployeeMap empMap = new EmployeeMap();
+
+        Employee emp1 = new Employee(0, "Alice", "123 Main St", 50000);
+        Employee emp2 = new Employee(1, "Bob", "456 Elm St", 60000);
+
+        empMap.addEmployee(emp1);
+        empMap.addEmployee(emp2);
+
+        empMap.display();
+
+        empMap.updateEmployee(emp1, "789 Oak St", 55000);
+
+        empMap.display();
+
+        empMap.removeEmployee(emp2);
+
+        empMap.display();
+
+    }
 }
