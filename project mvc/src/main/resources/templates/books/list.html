@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library Management</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+<main class="page">
+    <section class="toolbar">
+        <div>
+            <p class="eyebrow">Spring MVC Project</p>
+            <h1>Library Management</h1>
+        </div>
+        <a class="button primary" th:href="@{/books/new}">Add Book</a>
+    </section>
+
+    <form class="search" method="get" th:action="@{/books}">
+        <input type="search" name="keyword" placeholder="Search by title, author, or ISBN" th:value="${keyword}">
+        <button class="button" type="submit">Search</button>
+        <a class="button muted" th:href="@{/books}">Clear</a>
+    </form>
+
+    <p class="alert" th:if="${message}" th:text="${message}"></p>
+
+    <section class="table-wrap">
+        <table>
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Title</th>
+                <th>Author</th>
+                <th>ISBN</th>
+                <th>Copies</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="book : ${books}">
+                <td th:text="${book.id}"></td>
+                <td th:text="${book.title}"></td>
+                <td th:text="${book.author}"></td>
+                <td th:text="${book.isbn}"></td>
+                <td th:text="${book.copiesAvailable}"></td>
+                <td class="actions">
+                    <a class="button small" th:href="@{/books/{id}/edit(id=${book.id})}">Edit</a>
+                    <form method="post" th:action="@{/books/{id}/delete(id=${book.id})}">
+                        <button class="button small danger" type="submit">Delete</button>
+                    </form>
+                </td>
+            </tr>
+            <tr th:if="${#lists.isEmpty(books)}">
+                <td colspan="6" class="empty">No books found.</td>
+            </tr>
+            </tbody>
+        </table>
+    </section>
+</main>
+</body>
+</html>
