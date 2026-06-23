@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${status + ' - ' + error}">Error</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+<main class="page narrow">
+    <section class="error-panel">
+        <p class="status" th:text="${status}">500</p>
+        <h1 th:text="${error}">Something Went Wrong</h1>
+        <p class="error-message" th:text="${message}">Please try again.</p>
+        <p class="path" th:if="${path}" th:text="${path}">/books</p>
+        <a class="button primary" th:href="@{/books}">Back to Books</a>
+    </section>
+</main>
+</body>
+</html>

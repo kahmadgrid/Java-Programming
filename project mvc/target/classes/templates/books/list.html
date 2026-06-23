@@ -16,8 +16,13 @@
         <a class="button primary" th:href="@{/books/new}">Add Book</a>
     </section>
 
-    <form class="search" method="get" th:action="@{/books}">
+    <form class="search" method="get" th:action="@{/books/search}">
         <input type="search" name="keyword" placeholder="Search by title, author, or ISBN" th:value="${keyword}">
+        <select name="size" aria-label="Page size">
+            <option value="5" th:selected="${pageSize == 5}">5</option>
+            <option value="10" th:selected="${pageSize == 10}">10</option>
+            <option value="20" th:selected="${pageSize == 20}">20</option>
+        </select>
         <button class="button" type="submit">Search</button>
         <a class="button muted" th:href="@{/books}">Clear</a>
     </form>
@@ -55,6 +60,25 @@
             </tr>
             </tbody>
         </table>
+    </section>
+
+    <section class="pagination" th:if="${totalItems > 0}">
+        <p th:text="'Showing ' + ${books.size()} + ' of ' + ${totalItems} + ' book(s)'"></p>
+        <nav aria-label="Pagination">
+            <a class="button small"
+               th:classappend="${currentPage == 0} ? ' disabled'"
+               th:href="@{/books(page=${currentPage - 1}, size=${pageSize}, keyword=${keyword})}">Previous</a>
+
+            <a class="button small"
+               th:each="pageNumber : ${#numbers.sequence(0, totalPages - 1)}"
+               th:classappend="${pageNumber == currentPage} ? ' active'"
+               th:href="@{/books(page=${pageNumber}, size=${pageSize}, keyword=${keyword})}"
+               th:text="${pageNumber + 1}">1</a>
+
+            <a class="button small"
+               th:classappend="${currentPage + 1 >= totalPages} ? ' disabled'"
+               th:href="@{/books(page=${currentPage + 1}, size=${pageSize}, keyword=${keyword})}">Next</a>
+        </nav>
     </section>
 </main>
 </body>

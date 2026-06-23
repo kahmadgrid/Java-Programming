@@ -81,6 +81,16 @@ input {
     font: inherit;
 }
 
+select {
+    min-height: 42px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 0 10px;
+    background: #ffffff;
+    color: var(--text);
+    font: inherit;
+}
+
 input:focus {
     border-color: var(--primary);
     outline: 3px solid rgba(36, 87, 197, 0.15);
@@ -126,6 +136,17 @@ input:focus {
 .button.danger {
     border-color: #f0b7af;
     color: var(--danger);
+}
+
+.button.active {
+    border-color: var(--primary);
+    background: var(--primary);
+    color: #ffffff;
+}
+
+.button.disabled {
+    pointer-events: none;
+    opacity: 0.45;
 }
 
 .alert {
@@ -176,6 +197,27 @@ tr:last-child td {
     text-align: center;
 }
 
+.pagination {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin-top: 18px;
+}
+
+.pagination p {
+    margin: 0;
+    color: var(--muted);
+    font-weight: 700;
+}
+
+.pagination nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: flex-end;
+}
+
 .book-form {
     display: grid;
     gap: 18px;
@@ -202,12 +244,45 @@ label span {
     gap: 10px;
 }
 
+.error-panel {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    box-shadow: 0 12px 28px rgba(31, 45, 61, 0.08);
+    padding: 28px;
+}
+
+.status {
+    margin: 0 0 10px;
+    color: var(--primary);
+    font-size: 48px;
+    font-weight: 800;
+}
+
+.error-message {
+    color: var(--muted);
+    font-size: 18px;
+}
+
+.path {
+    border-radius: 6px;
+    background: var(--bg);
+    color: var(--muted);
+    padding: 10px 12px;
+    overflow-wrap: anywhere;
+}
+
 @media (max-width: 700px) {
     .toolbar,
     .search,
-    .form-actions {
+    .form-actions,
+    .pagination {
         align-items: stretch;
         flex-direction: column;
+    }
+
+    .pagination nav {
+        justify-content: stretch;
     }
 
     h1 {

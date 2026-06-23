@@ -1,19 +1,24 @@
 package com.example.librarymanagement.model;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.PositiveOrZero;
+import jakarta.validation.constraints.Size;
 
 public class Book {
 
     private Long id;
 
     @NotBlank(message = "Title is required")
+    @Size(min = 2, max = 100, message = "Title must be between 2 and 100 characters")
     private String title;
 
     @NotBlank(message = "Author is required")
+    @Size(min = 2, max = 80, message = "Author must be between 2 and 80 characters")
     private String author;
 
     @NotBlank(message = "ISBN is required")
+    @Pattern(regexp = "^(97[89])?\\d{9}[\\dXx]$", message = "ISBN must be a valid 10 or 13 digit value")
     private String isbn;
 
     @PositiveOrZero(message = "Copies cannot be negative")
